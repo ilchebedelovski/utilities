@@ -1,0 +1,27 @@
+Source side
+- Configured attribute for non accidental removing of the directories
+	# chattr +i -R mage-1910
+- For uploading new patch you need to upload the SUPE-xxxx directory with included patch in every of the listed magento versions
+- For uploading new magento version you need to upload directory magento-xxxx with included all available patches
+
+
+Clients side
+- Configure sftp key login
+
+- Put patch script in gitignore
+
+- Upload the following files:
+	patch_upgrade.sh
+	patch_version.php
+	app/etc/applied.patches.num
+
+- Set permissions to the uploaded files:
+	# chmod +x patch_upgrade.sh
+	# chmod +x patch_version.php
+
+- Configure cronjob once a day
+	* * * * * cd /var/www/html/environments/development/dev2-1810 && /bin/bash patch_upgrade.sh
+
+
+sftp login
+magentopatch:cvYz9qI2
