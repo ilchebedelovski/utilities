@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+# Composer: Ilche Bedelovski
+# Version: 1.0
+# Last update: 30-11-2014
+
 # Script for tracking running Linux process and receiving info for resources usage and disk usage included
 
 import time

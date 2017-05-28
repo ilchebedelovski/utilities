@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+# Composer: Ilche Bedelovski
+# Version: 1.0
+# Last update: 18-10-2014
+
 # Script for collecting details about specific environments and presenting the results on web
 
 import subprocess

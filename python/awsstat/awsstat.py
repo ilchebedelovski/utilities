@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+# Composer: Ilche Bedelovski
+# Version: 1.0
+# Last update: 30-11-2014
+
 # Script for receiving reports from Amazon Web Services
 
 import os
