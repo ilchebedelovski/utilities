@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Composer: Ilche Bedelovski
+# Version: 1.0
+# Last update: 19-06-2013
+
+# A script for scheduling environments creation
+
 INPUT=( $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20})
 ELEMENTS=${#INPUT[@]}
 DATE=$(date +"%y%m%d%k%M")
@@ -43,8 +49,6 @@ for (( i=0;i<$ELEMENTS;i++ )); do
 		VCONF=${VARIABLE##*__}
         fi
 done
-
-#echo -e "$MYSQLUSERNAME  $MYSQLPASSWORD $MYSQLHOSTNAME $MYSQLDBNAME $BASICDBNAME $SRCPATH $DSTPATH $DOMAINNAME $SQLFILENAME $VHOSTPATH $MYSQLTRIALDB $TRIALDIRECTORY $FORINSTALL $STARTDATE $TRIALID $ADMINPASSWORD"
 
 function add {
 

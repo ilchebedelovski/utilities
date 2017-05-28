@@ -1,10 +1,13 @@
 #!/bin/bash
 
 # Composer: Ilche Bedelovski
-# Version: 1.4
+# Version: 1.5
 # Last update: 20-11-2014
 
-EMAIL="ilche@ecomwise.com"
+# A script for checking resources on a CentOS machine and reporting them
+
+# Change this
+EMAIL="devops@example.com"
 
 # 1 min load avg
 MAX_LOAD=1
@@ -117,16 +120,13 @@ send_alert() {
 		mail=/bin/mail
 		ps auxwwwf | $mail -s "$SUBJECTLINE" $EMAIL
 		echo -e "sent from /bin/mail \n"
-		exit
 	elif [ -f /usr/sbin/sendmail ]; then
 		mail=/usr/sbin/sendmail
 		echo -e "Subject: $SUBJECTLINE \n`ps auxwwwf`" | $mail -v $EMAIL
 		echo -e "sent from /usr/sbin/sendmail\n"
-		exit
 	else
 		echo "please provide another mail sender"
 	fi
-	exit
 }
 
 # php processes older than 3 days
@@ -135,9 +135,13 @@ if [ ${#PHPPIDARRAY[@]} -gt 1 ]; then
         	pidetime=$(echo `ps -eo pid,etime | grep ${PHPPIDARRAY[$i]} | awk '{print $2}' | cut -d "-" -f 1`)
 		re='^[0-9]+$'
 		if [[ $pidetime =~ $re ]]; then
-        		if (( "$pidetime" > "3" )); then
-				arg1="Old_php_procs"
-                		send_alert $arg1
+        		if (( "$pidetime" > "1" )); then
+				action_connection=$(echo `ps aux | grep php | grep ${PHPPIDARRAY[$i]} | awk '{print $12 }' | awk -F/ '{print $NF}'`)	
+				if [ "$action_connection" == "action_connections.php" ]; then
+					`/usr/bin/skill -p ${PHPPIDARRAY[$i]}`	
+					arg1="Old_php_procs"
+                			send_alert $arg1	
+				fi
         		fi
 		fi
 	done
@@ -150,7 +154,7 @@ fi
 
 if [ $TOTAL_PERCENTAGE_INT -gt $SWAP_ALLOWED_INT ]; then 
 	arg1="High_Swap_used"
-	send_alert $arg1
+	#send_alert $arg1
 fi
 
 if [ $MEM_CACHED_FREE -lt $MIN_MEM_USED ]; then

@@ -1,6 +1,11 @@
 #!/bin/bash
 
-# exporting AWS global variables because exporting from .bashrc is not available in cron
+# Composer: Ilche Bedelovski
+# Version: 1.0
+# Last update: 01-07-2014
+
+# A script for remote checking AWS instances
+
 export PATH=$PATH:$AWS_CLOUDWATCH_HOME/bin
 
 CAT_BIN=`which cat`

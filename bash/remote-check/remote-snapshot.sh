@@ -4,7 +4,8 @@
 # Version: 1.1
 # Last update: 27-04-2015
 
-# exporting AWS global variables because exporting from .bashrc is not available in cron
+# Checking AWS services
+
 set -ue
 set -o pipefail
 
@@ -22,7 +23,7 @@ logfile="/var/log/ebs-snapshot.log"
 logfile_max_lines="5000"
 
 # Retention date 
-retention_days="7"
+retention_days="6"
 retention_date_in_seconds=`date +%s --date "$retention_days days ago"`
 
 log_setup() {
@@ -41,8 +42,7 @@ log() {
 
 snapshot_volume() {
 	date=`date +"%Y%m%d"`
-	instance_id='i-a536f141' #jira live
-	#instance_id='i-3d5e42da' #jira demo
+	instance_id='i-a536f141'
 	region='eu-west-1'
 
 	echo -e "Looking for volumes in $instance_id..."
@@ -61,8 +61,7 @@ snapshot_volume() {
 }
 
 snapshot_cleanup() {
-	instance_id='i-a536f141' #jira live
-        #instance_id='i-3d5e42da' #jira demo
+        instance_id='i-a536f141'
         region='eu-west-1'
 
         echo -e "Looking for old snapshots for $instance_id..."

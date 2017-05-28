@@ -4,7 +4,8 @@
 # Version: 1.1
 # Last update: 26-11-2014
 
-# exporting AWS global variables because exporting from .bashrc is not available in cron
+# A script for checking resources remotely (for AWS instances)
+
 export PATH=$PATH:$EC2_HOME/bin
 export PATH=$PATH:/usr/sbin
 

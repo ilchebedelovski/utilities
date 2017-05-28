@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Composer: Ilche Bedelovski
+# Version: 1.0
+# Last update: 14-12-2011
+
+# A script for counting processes
+
 pids=$(echo `ps aux | grep php | awk '{print $2}'`)
 pidsArray=($pids)
 
